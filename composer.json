@@ -1,0 +1,33 @@
+{
+    "name": "prezent/ink-bundle",
+    "type": "library",
+    "description": "Easy responsive e-mails using Foundation and Inky",
+    "keywords": ["email", "responsive", "twig", "foundation", "inky"],
+    "homepage": "http://www.prezent.nl",
+    "require": {
+        "php": "^5.5|^7.0",
+        "hampe/inky": "^1.3",
+        "symfony/framework-bundle": "^2.6|^3.0",
+        "tijsverkoyen/css-to-inline-styles": "^2.2",
+        "symfony/twig-bundle": "^2.6|^3.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sander Marechal",
+            "email": "sander@prezent.nl"
+        },
+        {
+            "name": "Prezent Internet B.V.",
+            "email": "github@prezent.nl"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Prezent\\InkBundle\\": "src/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
