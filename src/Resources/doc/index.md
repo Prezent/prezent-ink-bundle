@@ -42,7 +42,7 @@ Configuration
 Configuration is entirely optional. The only option is defining how many columns you want to use
 in the Foundation for Emails grid. The default is 12 columns.
 
-```
+```yml
 # app/config/config.yml
 
 prezent_ink:
