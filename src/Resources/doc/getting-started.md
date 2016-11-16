@@ -79,7 +79,7 @@ After you have created your template, you can create a Swiftmailer message from 
 service. Example:
 
 ```php
-$message = $this->get('prezent_ink.factory')->getMessage('@AppBundle:Mail:hello.eml.twig', [
+$message = $this->get('prezent_ink.factory')->getMessage('AppBundle:Mail:hello.eml.twig', [
     // Twig parameters
 ]);
 ```

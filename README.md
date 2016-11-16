@@ -12,7 +12,7 @@ class AppController extends Controller
 {
     public function emailAction()
     {
-        $message = $this->get('prezent_ink.factory')->getMessage('@AppBundle:Mail:hello.eml.twig', [
+        $message = $this->get('prezent_ink.factory')->getMessage('AppBundle:Mail:hello.eml.twig', [
             'user' => $this->getUser(),
         ]);
 

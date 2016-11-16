@@ -16,7 +16,7 @@ class TestController extends Controller
 {
     public function previewHtmlAction()
     {
-        $html = $this->get('prezent_ink.factory')->getHtmlPart('@AppBundle:Mail:hello.eml.twig', [
+        $html = $this->get('prezent_ink.factory')->getHtmlPart('AppBundle:Mail:hello.eml.twig', [
             // Twig parameters
         ]);
 
