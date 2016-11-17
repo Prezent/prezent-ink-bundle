@@ -59,7 +59,7 @@ class InlineStyleComponentFactory implements ComponentFactoryInterface
             $file = $this->kernel->locateResource($file, null, true);
         } else {
             if (!file_exists($attributes['href'])) {
-                $file = $this->kernel->getRootDir() . ltrim($file, '/');
+                $file = $this->kernel->getRootDir() . '/' . ltrim($file, '/');
 
                 if (!file_exists($file)) {
                     throw new \RuntimeException(sprintf('Could not find stylesheet "%s".', $attributes['href']));
@@ -68,7 +68,7 @@ class InlineStyleComponentFactory implements ComponentFactoryInterface
         }
 
         $style = new HtmlNode('style');
-        $style->addChild(new TextNode(file_get_contents($attributes['href'])));
+        $style->addChild(new TextNode(file_get_contents($file)));
 
         return $style;
     }
