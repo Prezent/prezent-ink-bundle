@@ -10,7 +10,7 @@ factory has `getTextPart()` and `getHtmlPart()` methods. Example usage:
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller
-use symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 class TestController extends Controller
 {
