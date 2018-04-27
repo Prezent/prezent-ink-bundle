@@ -8,24 +8,20 @@
 
     </parameters>
     <services>
+        <defaults autowire="true" autoconfigure="true" public="false" />
 
-        <service id="prezent_ink.factory" class="Prezent\InkBundle\Mail\TwigFactory" public="true">
-            <argument type="service" id="twig" />
-            <argument type="service" id="prezent_ink.inky" />
-            <argument type="service" id="prezent_ink.inliner" />
-        </service>
+        <service id="Prezent\InkBundle\Mail\TwigFactory" public="true" />
 
-        <service id="prezent_ink.inky" class="Hampe\Inky\Inky">
+        <service id="Hampe\Inky\Inky">
             <argument>%prezent_ink.grid_columns%</argument>
             <argument /> <!-- Inky components -->
         </service>
 
-        <service id="prezent_ink.inky_component.inline_style" class="Prezent\InkBundle\Inky\InlineStyleComponentFactory">
-            <argument type="service" id="kernel" />
+        <service id="Prezent\InkBundle\Inky\InlineStyleComponentFactory">
             <tag name="prezent_ink.inky_component" />
         </service>
 
-        <service id="prezent_ink.inliner" class="TijsVerkoyen\CssToInlineStyles\CssToInlineStyles"/>
+        <service id="TijsVerkoyen\CssToInlineStyles\CssToInlineStyles"/>
 
     </services>
 </container>
