@@ -9,7 +9,7 @@
     </parameters>
     <services>
 
-        <service id="prezent_ink.factory" class="Prezent\InkBundle\Mail\TwigFactory">
+        <service id="prezent_ink.factory" class="Prezent\InkBundle\Mail\TwigFactory" public="true">
             <argument type="service" id="twig" />
             <argument type="service" id="prezent_ink.inky" />
             <argument type="service" id="prezent_ink.inliner" />
