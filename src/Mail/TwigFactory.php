@@ -3,9 +3,8 @@
 namespace Prezent\InkBundle\Mail;
 
 use Hampe\Inky\Inky;
-use PHPHtmlParser\Dom;
+use Pelago\Emogrifier;
 use Symfony\Component\Routing\RequestContext;
-use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 /**
  * Create e-mail messages from Twig templates
@@ -31,12 +30,8 @@ class TwigFactory
 
     /**
      * Constructor
-     *
-     * @param \Twig_Environment $twig
-     * @param Inky $inky
-     * @param CssToInlineStyles $inliner
      */
-    public function __construct(\Twig_Environment $twig, Inky $inky, CssToInlineStyles $inliner)
+    public function __construct(\Twig_Environment $twig, Inky $inky, Emogrifier $inliner)
     {
         $this->twig = $twig;
         $this->inky = $inky;
@@ -117,7 +112,11 @@ class TwigFactory
     {
         $html = $template->renderBlock('part_html', $parameters);
         $html = $this->inky->releaseTheKraken($html);
-        $html = $this->inliner->convert($html);
+
+        $this->inliner->setHtml($html);
+        $this->inliner->setCss('');
+
+        $html = $this->inliner->emogrify();
 
         return $html;
     }

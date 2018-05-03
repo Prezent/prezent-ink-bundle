@@ -22,7 +22,7 @@
             <tag name="prezent_ink.inky_component" />
         </service>
 
-        <service id="TijsVerkoyen\CssToInlineStyles\CssToInlineStyles"/>
+        <service id="Pelago\Emogrifier"/>
 
     </services>
 </container>
