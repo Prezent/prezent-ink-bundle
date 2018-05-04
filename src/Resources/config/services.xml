@@ -11,6 +11,7 @@
         <defaults autowire="true" autoconfigure="true" public="false" />
 
         <service id="Prezent\InkBundle\Mail\TwigFactory" public="true" />
+        <service id="prezent_ink.factory" alias="Prezent\InkBundle\Mail\TwigFactory"/>
 
         <service id="Hampe\Inky\Inky">
             <argument>%prezent_ink.grid_columns%</argument>
