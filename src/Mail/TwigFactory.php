@@ -55,10 +55,13 @@ class TwigFactory
         $template = $this->twig->loadTemplate($name);
         $parameters = $this->twig->mergeGlobals($parameters);
 
-        return \Swift_Message::newInstance()
+        $message = new \Swift_Message();
+        $message
             ->setSubject($template->renderBlock('subject', $parameters))
             ->setBody($this->renderTextPart($template, $parameters), 'text/plain')
             ->addPart($this->renderHtmlPart($template, $parameters), 'text/html');
+
+        return $message;
     }
 
     /**
