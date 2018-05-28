@@ -1,6 +1,10 @@
 prezent/ink-bundle
 ==================
 
+__Using Symfony 2.7 up to 3.2?__  
+Please use v0.1.5 of this bundle. Later versions are not compatible with those versions of Symfony.
+
+
 Easy responsive e-emails using Foundation and Inky
 
 ```php
