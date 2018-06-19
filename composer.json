@@ -6,10 +6,10 @@
     "homepage": "http://www.prezent.nl",
     "require": {
         "php": "^5.5|^7.0",
-        "hampe/inky": "^1.3",
-        "symfony/framework-bundle": "^2.6|^3.0|^4.0",
-        "tijsverkoyen/css-to-inline-styles": "^2.2",
+        "prezent/inky": "^0.1",
+        "pelago/emogrifier": "^2.0",
         "swiftmailer/swiftmailer": "^5.4|^6.0",
+        "symfony/framework-bundle": "^2.6|^3.0|^4.0",
         "symfony/twig-bundle": "^2.6|^3.0|^4.0"
     },
     "license": "MIT",

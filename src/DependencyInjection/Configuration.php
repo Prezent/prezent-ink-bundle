@@ -20,12 +20,6 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('prezent_ink');
 
-        $rootNode
-            ->children()
-                ->scalarNode('grid_columns')->defaultValue(12)->end()
-            ->end()
-        ;
-
         return $treeBuilder;
     }
 }

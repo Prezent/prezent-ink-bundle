@@ -2,10 +2,7 @@
 
 namespace Prezent\InkBundle\Inky;
 
-use Hampe\Inky\Component\ComponentFactoryInterface;
-use Hampe\Inky\Inky;
-use PHPHtmlParser\Dom\HtmlNode;
-use PHPHtmlParser\Dom\TextNode;
+use Prezent\Inky\Component\ComponentFactory;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -13,7 +10,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
  *
  * @author Sander Marechal
  */
-class InlineStyleComponentFactory implements ComponentFactoryInterface
+class InlineStyleComponentFactory implements ComponentFactory
 {
     /**
      * @var KernelInterface
@@ -41,35 +38,35 @@ class InlineStyleComponentFactory implements ComponentFactoryInterface
     /**
      * {@inheritDoc}
      */
-    public function parse(HtmlNode $element, Inky $inky)
+    public function parse(\DOMNode $element)
     {
-        $attributes = $element->getAttributes();
-
-        if (!isset($attributes['rel']) || $attributes['rel'] !== 'stylesheet') {
+        if (!$element->hasAttribute('rel') || $element->getAttributes('rel') !== 'stylesheet') {
             return; // Not a stylesheet
         }
 
-        if (!isset($attributes['href'])) {
+        if (!$element->hasAttribute('href')) {
             return; // No href attribute
         }
 
-        $file = $attributes['href'];
+        $file = $element->getAttributes('href');
 
         if (isset($file[0]) && $file[0] === '@') {
             $file = $this->kernel->locateResource($file, null, true);
         } else {
-            if (!file_exists($attributes['href'])) {
+            if (!file_exists($file)) {
                 $file = $this->kernel->getRootDir() . '/' . ltrim($file, '/');
 
                 if (!file_exists($file)) {
-                    throw new \RuntimeException(sprintf('Could not find stylesheet "%s".', $attributes['href']));
+                    throw new \RuntimeException(
+                        sprintf('Could not find stylesheet "%s".', $element->getAttributes('href'))
+                    );
                 }
             }
         }
 
-        $style = new HtmlNode('style');
-        $style->addChild(new TextNode(file_get_contents($file)));
+        $style = $element->ownerDocument->createElement('style');
+        $style->textContent = file_get_contents($file);
 
-        return $style;
+        $element->parentNode->replaceChild($style, $element);
     }
 }

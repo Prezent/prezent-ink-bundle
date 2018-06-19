@@ -53,8 +53,8 @@ because it generates a path relative to your URL, not your filesystem. You can r
 3. Kernel resources prefixed by `@`, such as `@AppBundle/Resources/public/css/email.css`
 
 Note that the InkBundle does *not* ship with any CSS. You should get the
-[Foundation for Emails](http://foundation.zurb.com/emails.html) CSS os SASS code yourself, in
-whatever way you normally use front-end libraries (Bower, Gulp, Assetic, etcetera).
+[Foundation for Emails](http://foundation.zurb.com/emails.html) CSS or SASS code yourself, in
+whatever way you normally use front-end libraries (Encore, Gulp, Assetic, etcetera).
 
 
 body\_text
@@ -75,11 +75,13 @@ HTML and deal with all the nested tables for you.
 Create a message
 ================
 
-After you have created your template, you can create a Swiftmailer message from it using the `prezent_ink.factory`
-service. Example:
+After you have created your template, you can create a Swiftmailer message from it using the `TwigFactory` service
+(legacy alias `prezent_ink.factory`). Example:
 
 ```php
-$message = $this->get('prezent_ink.factory')->getMessage('AppBundle:Mail:hello.eml.twig', [
+use Prezent\InkBundle\Mail\TwigFactory;
+
+$message = $this->get(TwigFactory::class)->getMessage('@App/mail/hello.eml.twig', [
     // Twig parameters
 ]);
 ```
