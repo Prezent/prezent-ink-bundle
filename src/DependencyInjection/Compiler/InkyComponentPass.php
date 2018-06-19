@@ -20,10 +20,6 @@ class InkyComponentPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has(Inky::class)) {
-            return;
-        }
-
         $definition = $container->findDefinition(Inky::class);
         $taggedServices = $container->findTaggedServiceIds('prezent_ink.inky_component');
 

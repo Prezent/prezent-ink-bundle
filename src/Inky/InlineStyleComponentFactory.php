@@ -40,7 +40,7 @@ class InlineStyleComponentFactory implements ComponentFactory
      */
     public function parse(\DOMNode $element)
     {
-        if (!$element->hasAttribute('rel') || $element->getAttributes('rel') !== 'stylesheet') {
+        if (!$element->hasAttribute('rel') || $element->getAttribute('rel') !== 'stylesheet') {
             return; // Not a stylesheet
         }
 
@@ -48,7 +48,7 @@ class InlineStyleComponentFactory implements ComponentFactory
             return; // No href attribute
         }
 
-        $file = $element->getAttributes('href');
+        $file = $element->getAttribute('href');
 
         if (isset($file[0]) && $file[0] === '@') {
             $file = $this->kernel->locateResource($file, null, true);
@@ -58,7 +58,7 @@ class InlineStyleComponentFactory implements ComponentFactory
 
                 if (!file_exists($file)) {
                     throw new \RuntimeException(
-                        sprintf('Could not find stylesheet "%s".', $element->getAttributes('href'))
+                        sprintf('Could not find stylesheet "%s".', $element->getAttribute('href'))
                     );
                 }
             }

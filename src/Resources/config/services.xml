@@ -12,6 +12,7 @@
             <tag name="prezent_ink.inky_component" />
         </service>
 
+        <service id="Prezent\Inky\Inky" />
         <service id="Pelago\Emogrifier"/>
 
     </services>
