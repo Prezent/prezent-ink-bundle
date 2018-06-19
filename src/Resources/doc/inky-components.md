@@ -1,27 +1,25 @@
 Custom Inky Components
 ======================
 
-The Inky syntax is parsed using the [hampe/inky](https://github.com/thampe/inky) library. You can add
-your own [custom components](https://github.com/thampe/inky#add-your-own-component-factory) to the parser
-by registering them as a service and tagging them with the `prezent_ink.inky_component` tag.
+The Inky syntax is parsed using the [prezent/inky](https://github.com/prezent/prezent-inky) library. You can add
+your own custom components to the parser by registering them as a service and tagging them with
+the `prezent_ink.inky_component` tag.
 
 ```php
 <?php
 
 namespace AppBundle\Inky;
 
-use Hampe\Inky\Component\ComponentFactoryInterface;
-use Hampe\Inky\Inky;
-use PHPHtmlParser\Dom\HtmlNode;
+use Prezent\Inky\Component\ComponentFactory;
 
-class TestComponentFactory implements ComponentFactoryInterface
+class TestComponentFactory implements ComponentFactory
 {
     public function getName()
     {
         return 'test' // name of the html tag.
     }
 
-    public function parse(HtmlNode $element, Inky $inkyInstance)
+    public function parse(\DOMNode $element)
     {
         // ...
     }
@@ -30,7 +28,7 @@ class TestComponentFactory implements ComponentFactoryInterface
 
 ```xml
 <!-- services.xml -->
-<service id="app.inky.test_component" class="appBundle\Inky\TestComponentFactory">
+<service id="AppBundle\Inky\TestComponentFactory">
     <tag name="prezent_ink.inky_component"/>
 </service>
 ```

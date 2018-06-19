@@ -9,6 +9,7 @@ factory has `getTextPart()` and `getHtmlPart()` methods. Example usage:
 ```php
 namespace AppBundle\Controller;
 
+use Prezent\InkBundle\Mail\TwigFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,7 +17,7 @@ class TestController extends Controller
 {
     public function previewHtmlAction()
     {
-        $html = $this->get('prezent_ink.factory')->getHtmlPart('AppBundle:Mail:hello.eml.twig', [
+        $html = $this->get(TwigFactory::class)->getHtmlPart('@App/mail/hello.eml.twig', [
             // Twig parameters
         ]);
 

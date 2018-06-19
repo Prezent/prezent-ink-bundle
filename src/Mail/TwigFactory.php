@@ -2,8 +2,8 @@
 
 namespace Prezent\InkBundle\Mail;
 
-use Hampe\Inky\Inky;
 use Pelago\Emogrifier;
+use Prezent\Inky\Inky;
 use Symfony\Component\Routing\RequestContext;
 
 /**
@@ -111,7 +111,7 @@ class TwigFactory
     private function renderHtmlPart(\Twig_Template $template, array $parameters)
     {
         $html = $template->renderBlock('part_html', $parameters);
-        $html = $this->inky->releaseTheKraken($html);
+        $html = $this->inky->parse($html);
 
         $this->inliner->setHtml($html);
         $this->inliner->setCss('');

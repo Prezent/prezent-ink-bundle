@@ -2,6 +2,7 @@
 
 namespace Prezent\InkBundle\DependencyInjection\Compiler;
 
+use Prezent\Inky\Inky;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
@@ -19,19 +20,15 @@ class InkyComponentPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has('Hampe\Inky\Inky')) {
+        if (!$container->has(Inky::class)) {
             return;
         }
 
-        $definition = $container->findDefinition('Hampe\Inky\Inky');
+        $definition = $container->findDefinition(Inky::class);
         $taggedServices = $container->findTaggedServiceIds('prezent_ink.inky_component');
 
-        $components = [];
-
         foreach ($taggedServices as $id => $tags) {
-            $components[] = new Reference($id);
+            $definition->addMethodCall('addComponentFactory', [new Reference($id)]);
         }
-
-        $definition->replaceArgument(1, $components);
     }
 }

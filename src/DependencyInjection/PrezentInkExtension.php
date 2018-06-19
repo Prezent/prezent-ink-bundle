@@ -24,7 +24,5 @@ class PrezentInkExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
-
-        $container->setParameter('prezent_ink.grid_columns', $config['grid_columns']);
     }
 }

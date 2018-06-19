@@ -2,21 +2,11 @@
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <parameters>
-
-        <parameter key="prezent_ink.grid_columns">12</parameter>
-
-    </parameters>
     <services>
         <defaults autowire="true" autoconfigure="true" public="false" />
 
         <service id="Prezent\InkBundle\Mail\TwigFactory" public="true" />
         <service id="prezent_ink.factory" alias="Prezent\InkBundle\Mail\TwigFactory"/>
-
-        <service id="Hampe\Inky\Inky">
-            <argument>%prezent_ink.grid_columns%</argument>
-            <argument /> <!-- Inky components -->
-        </service>
 
         <service id="Prezent\InkBundle\Inky\InlineStyleComponentFactory">
             <tag name="prezent_ink.inky_component" />
