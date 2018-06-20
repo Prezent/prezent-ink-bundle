@@ -1,0 +1,21 @@
+{% extends '@PrezentInk/base.eml.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/email.css" />
+{% endblock %}
+
+{% block subject %}Hello {{ user }}{% endblock %}
+
+{% block body_text %}
+Hello {{ user }},
+
+Nice to meet you!
+{% endblock %}
+
+{% block body_html %}
+<container>
+    <h1>Hello {{ user }},</h1>
+    <spacer size="16"></spacer>
+    <callout>Nice to meet you!</callout>
+</container>
+{% endblock %}

@@ -1,0 +1,16 @@
+framework:
+    default_locale: en
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+    profiler: ~
+    secret: test
+    session:
+        storage_id: session.storage.mock_file
+    test: true
+
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+
+web_profiler:
+    toolbar: false
