@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Prezent\InkBundle\Tests\Inky;
 
 use PHPUnit\Framework\TestCase;
