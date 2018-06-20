@@ -1,6 +1,8 @@
 prezent/ink-bundle
 ==================
 
+[![Build Status](https://travis-ci.org/Prezent/prezent-ink-bundle.svg?branch=master)](https://travis-ci.org/Prezent/prezent-ink-bundle)
+
 Easy responsive e-emails using Foundation and Inky
 
 ```php
