@@ -5,7 +5,6 @@ namespace Prezent\InkBundle\Mail;
 use Pelago\Emogrifier;
 use Prezent\Inky\Inky;
 use Symfony\Component\Routing\RequestContext;
-use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 /**
  * Create e-mail messages from Twig templates
@@ -36,7 +35,7 @@ class TwigFactory
      * @param Inky $inky
      * @param CssToInlineStyles $inliner
      */
-    public function __construct(\Twig_Environment $twig, Inky $inky, CssToInlineStyles $inliner)
+    public function __construct(\Twig_Environment $twig, Inky $inky, Emogrifier $inliner)
     {
         $this->twig = $twig;
         $this->inky = $inky;
