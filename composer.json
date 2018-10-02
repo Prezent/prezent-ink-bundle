@@ -6,6 +6,7 @@
     "homepage": "http://www.prezent.nl",
     "require": {
         "php": "^5.5|^7.0",
+        "lib-libxml": ">=2.7.8",
         "prezent/inky": "^0.1",
         "pelago/emogrifier": "^2.0",
         "symfony/framework-bundle": "^3.3|^4.0",
