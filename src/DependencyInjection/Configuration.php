@@ -17,8 +17,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('prezent_ink');
+        $treeBuilder = new TreeBuilder('prezent_ink');
 
         return $treeBuilder;
     }
