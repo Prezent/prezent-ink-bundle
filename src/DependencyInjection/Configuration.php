@@ -19,6 +19,12 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('prezent_ink');
 
+        if (method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            $rootNode = $treeBuilder->root('prezent_ink');
+        }
+
         return $treeBuilder;
     }
 }
