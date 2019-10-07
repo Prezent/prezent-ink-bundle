@@ -41,4 +41,9 @@ public function registerBundles()
 Configuration
 -------------
 
-There are no configuration options.
+You can optionally set the `public\_dir` option where this bundle will look for CSS files referenced in your e-mail messages.
+
+```yaml
+prezent_ink:
+    public_dir: '%kernel.project_dir%/public'
+```

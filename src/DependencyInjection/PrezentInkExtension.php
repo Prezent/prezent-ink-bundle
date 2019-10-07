@@ -2,6 +2,7 @@
 
 namespace Prezent\InkBundle\DependencyInjection;
 
+use Prezent\InkBundle\Inky\InlineStyleComponentFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -24,5 +25,9 @@ class PrezentInkExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+
+        if ($config['public_dir']) {
+            $container->getDefinition(InlineStyleComponentFactory::class)->addMethodCall('setPublicDir', [$config['public_dir']]);
+        }
     }
 }

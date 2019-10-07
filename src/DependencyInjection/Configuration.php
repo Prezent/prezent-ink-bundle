@@ -25,6 +25,12 @@ class Configuration implements ConfigurationInterface
             $rootNode = $treeBuilder->root('prezent_ink');
         }
 
+        $rootNode
+            ->children()
+                ->scalarNode('public_dir')->defaultNull()->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }

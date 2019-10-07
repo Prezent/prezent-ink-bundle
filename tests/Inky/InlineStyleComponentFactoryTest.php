@@ -27,6 +27,22 @@ class InlineStyleComponentFactoryTest extends TestCase
         $this->assertContains('background-color', $crawler->filter('style')->text());
     }
 
+    public function testPublicFile()
+    {
+        $kernel = $this->createMock(KernelInterface::class);
+        $crawler = new Crawler('<link rel="stylesheet" href="css/email.css" />');
+
+        $inliner = new InlineStyleComponentFactory($kernel);
+        $inliner->setPublicDir(__DIR__ . '/../Fixture');
+
+        foreach ($crawler->filter('link') as $node) {
+            $inliner->parse($node);
+        }
+
+        $this->assertCount(1, $crawler->filter('style'));
+        $this->assertContains('background-color', $crawler->filter('style')->text());
+    }
+
     public function testRelativeFile()
     {
         $kernel = $this->createMock(KernelInterface::class);

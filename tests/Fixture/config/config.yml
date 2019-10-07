@@ -17,3 +17,6 @@ twig:
 
 web_profiler:
     toolbar: false
+
+prezent_ink:
+    public_dir: '%kernel.project_dir%/css'
