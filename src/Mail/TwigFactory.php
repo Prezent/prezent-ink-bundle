@@ -5,6 +5,8 @@ namespace Prezent\InkBundle\Mail;
 use Pelago\Emogrifier;
 use Prezent\Inky\Inky;
 use Symfony\Component\Routing\RequestContext;
+use Twig\Environment;
+use Twig\Template;
 
 /**
  * Create e-mail messages from Twig templates
@@ -14,7 +16,7 @@ use Symfony\Component\Routing\RequestContext;
 class TwigFactory
 {
     /**
-     * @var \Twig_Environment
+     * @var Environment
      */
     private $twig;
 
@@ -31,7 +33,7 @@ class TwigFactory
     /**
      * Constructor
      */
-    public function __construct(\Twig_Environment $twig, Inky $inky, Emogrifier $inliner)
+    public function __construct(Environment $twig, Inky $inky, Emogrifier $inliner)
     {
         $this->twig = $twig;
         $this->inky = $inky;
@@ -92,11 +94,11 @@ class TwigFactory
     /**
      * Render the text part
      *
-     * @param \Twig_Template $template
+     * @param Template $template
      * @param array $parameters
      * @return string
      */
-    private function renderTextPart(\Twig_Template $template, array $parameters)
+    private function renderTextPart(Template $template, array $parameters)
     {
         return $template->renderBlock('part_text', $parameters);
     }
@@ -104,11 +106,11 @@ class TwigFactory
     /**
      * Render the html part
      *
-     * @param \Twig_Template $template
+     * @param Template $template
      * @param array $parameters
      * @return string
      */
-    private function renderHtmlPart(\Twig_Template $template, array $parameters)
+    private function renderHtmlPart(Template $template, array $parameters)
     {
         $html = $template->renderBlock('part_html', $parameters);
         $html = $this->inky->parse($html);
