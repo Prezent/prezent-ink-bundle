@@ -45,6 +45,11 @@ class AppKernel extends Kernel
         return __DIR__;
     }
 
+    public function getProjectDir()
+    {
+        return __DIR__;
+    }
+
     public function getCacheDir()
     {
         return sys_get_temp_dir().'/'.Kernel::VERSION.'/'.$this->testCase.'/cache/'.$this->environment;

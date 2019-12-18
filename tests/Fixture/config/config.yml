@@ -13,6 +13,7 @@ swiftmailer:
 
 twig:
     debug: '%kernel.debug%'
+    exception_controller: null
     strict_variables: '%kernel.debug%'
 
 web_profiler:
@@ -20,3 +21,11 @@ web_profiler:
 
 prezent_ink:
     public_dir: '%kernel.project_dir%/css'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+    Prezent\InkBundle\Tests\Fixture\AppBundle\Controller\EmailController:
+        tags: [controller.service_arguments]

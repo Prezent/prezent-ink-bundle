@@ -38,7 +38,7 @@ class EmailTest extends WebTestCase
 
         $this->assertInstanceOf(\Swift_Message::class, $message);
         $this->assertEquals('Hello world', $message->getSubject());
-        $this->assertContains('Hello world', $message->getBody());
+        $this->assertStringContainsString('Hello world', $message->getBody());
 
         $crawler = new Crawler($message->getChildren()[0]->getBody());
 

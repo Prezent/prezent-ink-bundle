@@ -85,7 +85,7 @@ class InlineStyleComponentFactory implements ComponentFactory
      * Find the location of a stylesheet
      *
      * First check for an @bundle shortcut, then check the configured publicDir, absolute path
-     * and finally path relative to the kernel root dir.
+     * and finally path relative to the project root.
      *
      * @return string
      */
@@ -107,7 +107,7 @@ class InlineStyleComponentFactory implements ComponentFactory
             return $file;
         }
 
-        $path = $this->kernel->getRootDir() . '/' . ltrim($file, '/');
+        $path = $this->kernel->getProjectDir() . '/' . ltrim($file, '/');
 
         if (file_exists($path)) {
             return $path;

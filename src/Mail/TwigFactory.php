@@ -6,7 +6,7 @@ use Pelago\Emogrifier;
 use Prezent\Inky\Inky;
 use Symfony\Component\Routing\RequestContext;
 use Twig\Environment;
-use Twig\Template;
+use Twig\TemplateWrapper;
 
 /**
  * Create e-mail messages from Twig templates
@@ -49,7 +49,7 @@ class TwigFactory
      */
     public function getMessage($name, array $parameters = [])
     {
-        $template = $this->twig->loadTemplate($name);
+        $template = $this->twig->load($name);
         $parameters = $this->twig->mergeGlobals($parameters);
 
         $message = new \Swift_Message();
@@ -70,7 +70,7 @@ class TwigFactory
      */
     public function getTextPart($name, array $parameters = [])
     {
-        $template = $this->twig->loadTemplate($name);
+        $template = $this->twig->load($name);
         $parameters = $this->twig->mergeGlobals($parameters);
 
         return $this->renderTextPart($template, $parameters);
@@ -85,7 +85,7 @@ class TwigFactory
      */
     public function getHtmlPart($name, array $parameters = [])
     {
-        $template = $this->twig->loadTemplate($name);
+        $template = $this->twig->load($name);
         $parameters = $this->twig->mergeGlobals($parameters);
 
         return $this->renderHtmlPart($template, $parameters);
@@ -94,11 +94,11 @@ class TwigFactory
     /**
      * Render the text part
      *
-     * @param Template $template
+     * @param TemplateWrapper $template
      * @param array $parameters
      * @return string
      */
-    private function renderTextPart(Template $template, array $parameters)
+    private function renderTextPart(TemplateWrapper $template, array $parameters)
     {
         return $template->renderBlock('part_text', $parameters);
     }
@@ -106,11 +106,11 @@ class TwigFactory
     /**
      * Render the html part
      *
-     * @param Template $template
+     * @param TemplateWrapper $template
      * @param array $parameters
      * @return string
      */
-    private function renderHtmlPart(Template $template, array $parameters)
+    private function renderHtmlPart(TemplateWrapper $template, array $parameters)
     {
         $html = $template->renderBlock('part_html', $parameters);
         $html = $this->inky->parse($html);

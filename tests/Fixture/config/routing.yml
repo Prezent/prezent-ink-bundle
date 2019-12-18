@@ -1,7 +1,7 @@
 send:
     path: /send
-    defaults: { _controller: 'AppBundle:Email:send' }
+    defaults: { _controller: 'Prezent\InkBundle\Tests\Fixture\AppBundle\Controller\EmailController::sendAction' }
 
 preview:
     path: /preview
-    defaults: { _controller: 'AppBundle:Email:preview' }
+    defaults: { _controller: 'Prezent\InkBundle\Tests\Fixture\AppBundle\Controller\EmailController::previewAction' }

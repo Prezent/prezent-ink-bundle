@@ -3,17 +3,17 @@
 namespace Prezent\InkBundle\Tests\Fixture\AppBundle\Controller;
 
 use Prezent\InkBundle\Mail\TwigFactory;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Sander Marechal
  */
-class EmailController extends Controller
+class EmailController extends AbstractController
 {
-    public function sendAction()
+    public function sendAction(TwigFactory $factory, \Swift_Mailer $mailer)
     {
-        $message = $this->get(TwigFactory::class)->getMessage('@App/hello.eml.twig', [
+        $message = $factory->getMessage('@App/hello.eml.twig', [
             'user' => 'world',
         ]);
 
@@ -22,14 +22,14 @@ class EmailController extends Controller
             ->setTo('john.doe@example.org')
         ;
 
-        $this->get('mailer')->send($message);
+        $mailer->send($message);
 
         return new Response('ok');
     }
 
-    public function previewAction()
+    public function previewAction(TwigFactory $factory)
     {
-        $message = $this->get(TwigFactory::class)->getHtmlPart('@App/hello.eml.twig', [
+        $message = $factory->getHtmlPart('@App/hello.eml.twig', [
             'user' => 'world',
         ]);
 
