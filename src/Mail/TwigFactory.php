@@ -5,6 +5,7 @@ namespace Prezent\InkBundle\Mail;
 use Pelago\Emogrifier;
 use Prezent\Inky\Inky;
 use Symfony\Component\Routing\RequestContext;
+use Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface;
 use Twig\Environment;
 use Twig\TemplateWrapper;
 
@@ -31,13 +32,23 @@ class TwigFactory
     private $inliner;
 
     /**
+     * @var EntrypointLookupCollectionInterface
+     */
+    private $entrypointLookupCollection;
+
+    /**
      * Constructor
      */
-    public function __construct(Environment $twig, Inky $inky, Emogrifier $inliner)
-    {
+    public function __construct(
+        Environment $twig,
+        Inky $inky,
+        Emogrifier $inliner,
+        EntrypointLookupCollectionInterface $entrypointLookupCollection = null
+    ) {
         $this->twig = $twig;
         $this->inky = $inky;
         $this->inliner = $inliner;
+        $this->entrypointLookupCollection = $entrypointLookupCollection;
     }
 
     /**
@@ -100,7 +111,10 @@ class TwigFactory
      */
     private function renderTextPart(TemplateWrapper $template, array $parameters)
     {
-        return $template->renderBlock('part_text', $parameters);
+        $text = $template->renderBlock('part_text', $parameters);
+        $this->reset();
+
+        return $text;
     }
 
     /**
@@ -120,6 +134,20 @@ class TwigFactory
 
         $html = $this->inliner->emogrify();
 
+        $this->reset();
+
         return $html;
+    }
+
+    /**
+     * Reset the twig renderer
+     *
+     * @return void
+     */
+    private function reset()
+    {
+        if ($this->entrypointLookupCollection) {
+            $this->entrypointLookupCollection->getEntrypointLookup()->reset();
+        }
     }
 }
