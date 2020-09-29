@@ -1,7 +1,8 @@
 framework:
     default_locale: en
     router:
-        resource: "%kernel.root_dir%/config/routing.yml"
+        utf8: true
+        resource: "%kernel.project_dir%/config/routing.yml"
     profiler: ~
     secret: test
     session:
