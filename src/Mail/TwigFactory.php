@@ -2,7 +2,7 @@
 
 namespace Prezent\InkBundle\Mail;
 
-use Pelago\Emogrifier;
+use Pelago\Emogrifier\CssInliner;
 use Prezent\Inky\Inky;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface;
@@ -27,11 +27,6 @@ class TwigFactory
     private $inky;
 
     /**
-     * @var CssToInlineStyles
-     */
-    private $inliner;
-
-    /**
      * @var EntrypointLookupCollectionInterface
      */
     private $entrypointLookupCollection;
@@ -42,12 +37,10 @@ class TwigFactory
     public function __construct(
         Environment $twig,
         Inky $inky,
-        Emogrifier $inliner,
         EntrypointLookupCollectionInterface $entrypointLookupCollection = null
     ) {
         $this->twig = $twig;
         $this->inky = $inky;
-        $this->inliner = $inliner;
         $this->entrypointLookupCollection = $entrypointLookupCollection;
     }
 
@@ -128,11 +121,7 @@ class TwigFactory
     {
         $html = $template->renderBlock('part_html', $parameters);
         $html = $this->inky->parse($html);
-
-        $this->inliner->setHtml($html);
-        $this->inliner->setCss('');
-
-        $html = $this->inliner->emogrify();
+        $html = CssInliner::fromHtml($html)->inlineCss()->render();
 
         $this->reset();
 

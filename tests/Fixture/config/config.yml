@@ -5,8 +5,6 @@ framework:
         resource: "%kernel.project_dir%/config/routing.yml"
     profiler: ~
     secret: test
-    session:
-        storage_id: session.storage.mock_file
     test: true
 
 swiftmailer:
