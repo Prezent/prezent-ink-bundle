@@ -75,7 +75,7 @@ HTML and deal with all the nested tables for you.
 Create a message
 ================
 
-After you have created your template, you can create a Swiftmailer message from it using the `TwigFactory` service
+After you have created your template, you can create a Symfony mailer message from it using the `TwigFactory` service
 (legacy alias `prezent_ink.factory`). Example:
 
 ```php

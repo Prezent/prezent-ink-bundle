@@ -5,21 +5,22 @@ namespace Prezent\InkBundle\Tests\Fixture\AppBundle\Controller;
 use Prezent\InkBundle\Mail\TwigFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 
 /**
  * @author Sander Marechal
  */
 class EmailController extends AbstractController
 {
-    public function sendAction(TwigFactory $factory, \Swift_Mailer $mailer)
+    public function sendAction(TwigFactory $factory, MailerInterface $mailer)
     {
         $message = $factory->getMessage('@App/hello.eml.twig', [
             'user' => 'world',
         ]);
 
         $message
-            ->setFrom('noreply@example.org')
-            ->setTo('john.doe@example.org')
+            ->from('noreply@example.org')
+            ->to('john.doe@example.org')
         ;
 
         $mailer->send($message);

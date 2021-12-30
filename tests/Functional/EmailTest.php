@@ -3,6 +3,7 @@
 namespace Prezent\InkBundle\Tests\Functional;
 
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\Mime\Email;
 
 /**
  * @author Sander Marechal
@@ -30,17 +31,18 @@ class EmailTest extends WebTestCase
         $client->enableProfiler();
 
         $crawler = $client->request('GET', '/send');
-        $collector = $client->getProfile()->getCollector('swiftmailer');
+        $collector = $client->getProfile()->getCollector('mailer');
+        $messages = $collector->getEvents()->getMessages();
 
-        $this->assertEquals(1, $collector->getMessageCount());
+        $this->assertCount(1, $messages);
 
-        $message = $collector->getMessages()[0];
+        $message = $messages[0];
 
-        $this->assertInstanceOf(\Swift_Message::class, $message);
+        $this->assertInstanceOf(Email::class, $message);
         $this->assertEquals('Hello world', $message->getSubject());
-        $this->assertStringContainsString('Hello world', $message->getBody());
+        $this->assertStringContainsString('Hello world', $message->getTextBody());
 
-        $crawler = new Crawler($message->getChildren()[0]->getBody());
+        $crawler = new Crawler($message->getHtmlBody());
 
         // Template is parsed
         $this->assertCount(1, $crawler->filter('h1:contains("Hello world")'));

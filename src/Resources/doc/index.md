@@ -21,8 +21,6 @@ This bundle can be installed using Composer. Tell composer to install the bundle
 $ php composer.phar require prezent/ink-bundle
 ```
 
-For Symfony 2.7 up to 3.2, you should use the 0.1.x branch of this bundle:
-
 Then, activate the bundle in your kernel:
 
 ```php

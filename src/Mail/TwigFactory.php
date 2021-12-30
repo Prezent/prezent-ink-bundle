@@ -4,6 +4,7 @@ namespace Prezent\InkBundle\Mail;
 
 use Pelago\Emogrifier\CssInliner;
 use Prezent\Inky\Inky;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface;
 use Twig\Environment;
@@ -45,22 +46,20 @@ class TwigFactory
     }
 
     /**
-     * Get a Swift message
+     * Get a mail message
      *
      * @param mixed $name
      * @param array $parameters
-     * @return \Swift_Message
      */
-    public function getMessage($name, array $parameters = [])
+    public function getMessage($name, array $parameters = []): Email
     {
         $template = $this->twig->load($name);
         $parameters = $this->twig->mergeGlobals($parameters);
 
-        $message = new \Swift_Message();
-        $message
-            ->setSubject($template->renderBlock('subject', $parameters))
-            ->setBody($this->renderTextPart($template, $parameters), 'text/plain')
-            ->addPart($this->renderHtmlPart($template, $parameters), 'text/html');
+        $message = (new Email())
+            ->subject($template->renderBlock('subject', $parameters))
+            ->text($this->renderTextPart($template, $parameters), 'text/plain')
+            ->html($this->renderHtmlPart($template, $parameters), 'text/html');
 
         return $message;
     }

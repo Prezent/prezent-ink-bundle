@@ -22,7 +22,6 @@ class AppKernel extends Kernel
     {
         return [
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle(),
             new \Symfony\Bundle\TwigBundle\TwigBundle(),
             new \Prezent\InkBundle\PrezentInkBundle(),

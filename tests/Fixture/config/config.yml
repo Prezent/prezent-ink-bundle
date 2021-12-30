@@ -6,9 +6,8 @@ framework:
     profiler: ~
     secret: test
     test: true
-
-swiftmailer:
-    disable_delivery: true
+    mailer:
+        dsn: 'null://null'
 
 twig:
     debug: '%kernel.debug%'
