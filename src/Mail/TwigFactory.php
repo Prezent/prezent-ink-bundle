@@ -58,8 +58,8 @@ class TwigFactory
 
         $message = (new Email())
             ->subject($template->renderBlock('subject', $parameters))
-            ->text($this->renderTextPart($template, $parameters), 'text/plain')
-            ->html($this->renderHtmlPart($template, $parameters), 'text/html');
+            ->text($this->renderTextPart($template, $parameters))
+            ->html($this->renderHtmlPart($template, $parameters));
 
         return $message;
     }
